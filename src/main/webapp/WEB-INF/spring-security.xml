@@ -1,0 +1,60 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+ 
+	<!-- enable use-expressions -->
+	<http auto-config="true" use-expressions="true">
+ 		<intercept-url pattern="/*" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/index" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/oldView" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/image" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/viewBetter" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/users" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/addedit" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/view" access="hasRole('ROLE_ADMIN')" />
+	</http>
+ 
+ 	<!--  
+	<authentication-manager>
+	  <authentication-provider>
+	    <user-service>
+			<user name="${ADMIN_USERNAME}" password="${ADMIN_PASSWORD}" authorities="ROLE_USER" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+	
+ 
+	//Select users and user_roles from database
+	<authentication-manager>
+	  <authentication-provider>
+		<jdbc-user-service data-source-ref="dataSource"
+		  users-by-username-query= 
+		  	"SELECT username, password, enabled FROM users WHERE username =?"
+		  authorities-by-username-query=
+		  	"SELECT username, role FROM user_roles WHERE username =?"/>
+	  </authentication-provider>
+	</authentication-manager>
+ 	-->
+ 	
+	<authentication-manager>  
+		<authentication-provider>  
+			<password-encoder ref="encoder" />
+			<jdbc-user-service data-source-ref="dataSource"
+		  		users-by-username-query= 
+		  			"SELECT username, password, enabled FROM users WHERE username =?"
+		  		authorities-by-username-query=
+		  			"SELECT u1.username, u2.role from users u1, user_roles u2 where u1.userid = u2.userid and u1.username =?"/>
+	  	</authentication-provider>  
+	</authentication-manager>  
+  
+	<beans:bean id="encoder"  
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">  
+		<beans:constructor-arg name="strength" value="10" />  
+	</beans:bean>  
+ 	
+</beans:beans>
