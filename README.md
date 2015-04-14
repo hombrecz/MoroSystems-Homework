@@ -2,14 +2,19 @@
 My project for testing Maven, Hibernate, Spring & PostgreSQL.
 
 ToDO:
-- Validator - přidávání uživatele - při porušení pravidel -> chyba s mvc:annotation driven, bez nefunguje
+- Validator - pridani � uzivatele - pri poruseni� pravidel -> chyba s mvc:annotation driven, bez nefunguje
 	- @autowired + @initBinder
 Bonus
 - user add/edit - zvolení role a dropdown list
 
-Další úkoly
-- vzhled - použít bootstrap (header, css)
-	- hlavička/šablona všech jsp načítána ze šablony (tag)
-	- menu pro přechody mezi jednotlivými stránkami - na každé stránce nebo tak něco
+Dalsi� ukoly
+- vzhled - pouzit bootstrap (header, css)
+	- hlavicka/sablona vsech jsp na�itana ze sablony (tag)
+	- menu pro prechody mezi jednotlivymi strankami - na kazde strance nebo tak neco
+	
+- vytvoreni databaze pri applicationStartup?
+- presunout language do resources
 
-DONE - nastudovat git - jak správně commitovat, vytvořit účet na githubu
+DONE
+ - nastudovat git - jak spravne commitovat, vytvorit ucet na githubu
+ - opravy pro rozchozeni na pracovni notebooku
