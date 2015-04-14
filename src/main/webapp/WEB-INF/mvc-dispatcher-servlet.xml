@@ -38,6 +38,7 @@
 		<property name="interceptors">
 			<list>
 				<ref bean="userBarInterceptor" />
+				<ref bean="localeChangeInterceptor" />
 			</list>
 		</property>
 	</bean>
@@ -89,5 +90,18 @@
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-
+    
+<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="basename" value="classpath:example"></property>
+    <property name="defaultEncoding" value="UTF-8">
+</property></bean>
+ 
+<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    <property name="paramName" value="lang">
+</property></bean>
+ 
+<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="defaultLocale" value="en">
+</property></bean>
+ 
 </beans>
