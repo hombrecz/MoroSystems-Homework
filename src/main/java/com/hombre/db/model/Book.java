@@ -13,27 +13,27 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "books", uniqueConstraints = @UniqueConstraint(columnNames = {"id"}))
+@Table(name = "books", uniqueConstraints = @UniqueConstraint(columnNames = { "id" }))
 public class Book {
-	
+
 	private Integer id;
 	private String title;
 	private String description;
 	private User user;
 
-	public Book () {
+	public Book() {
 	}
-	
-	public Book (String title, String description, User user) {
+
+	public Book(String title, String description, User user) {
 		this.title = title;
 		this.description = description;
 		this.user = user;
 	}
-	
+
 	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	public Integer getId() {
 		return id;
 	}
@@ -43,7 +43,7 @@ public class Book {
 	}
 
 	@NotNull
-	@Column(name="title")
+	@Column(name = "title")
 	public String getTitle() {
 		return title;
 	}
@@ -51,8 +51,8 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -62,7 +62,7 @@ public class Book {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="userid")
+	@JoinColumn(name = "userid")
 	public User getUser() {
 		return user;
 	}
@@ -70,6 +70,5 @@ public class Book {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 }

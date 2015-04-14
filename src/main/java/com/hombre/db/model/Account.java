@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "accounts")
 public class Account {
@@ -23,21 +22,22 @@ public class Account {
 	private int bankCode;
 	private User user;
 
-	public Account () {
+	public Account() {
 	}
-	
-	public Account (String name, int accountPrefix, long accountNumber, int bankCode, User user) {
+
+	public Account(String name, int accountPrefix, long accountNumber,
+			int bankCode, User user) {
 		this.name = name;
 		this.accountPrefix = accountPrefix;
 		this.accountNumber = accountNumber;
 		this.bankCode = bankCode;
 		this.user = user;
 	}
-	
+
 	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	public Integer getId() {
 		return id;
 	}
@@ -47,7 +47,7 @@ public class Account {
 	}
 
 	@NotNull
-	@Column(name="name")
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -58,7 +58,7 @@ public class Account {
 
 	@NotNull
 	@Size(min = 1, max = 999999)
-	@Column(name="accountprefix")
+	@Column(name = "accountprefix")
 	public int getAccountPrefix() {
 		return accountPrefix;
 	}
@@ -68,7 +68,7 @@ public class Account {
 	}
 
 	@NotNull
-	@Column(name="accountnumber")
+	@Column(name = "accountnumber")
 	public long getAccountNumber() {
 		return accountNumber;
 	}
@@ -79,7 +79,7 @@ public class Account {
 
 	@NotNull
 	@Size(min = 1, max = 9999)
-	@Column(name="bankcode")
+	@Column(name = "bankcode")
 	public int getBankCode() {
 		return bankCode;
 	}
@@ -88,7 +88,7 @@ public class Account {
 		this.bankCode = bankCode;
 	}
 
-	@JoinColumn(name="userid")
+	@JoinColumn(name = "userid")
 	@ManyToOne(fetch = FetchType.LAZY)
 	public User getUser() {
 		return user;
@@ -97,5 +97,5 @@ public class Account {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }

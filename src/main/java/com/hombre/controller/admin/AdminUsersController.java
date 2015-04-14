@@ -19,43 +19,44 @@ import com.hombre.security.HashCode;
 
 @Controller
 public class AdminUsersController {
-		
+
 	@Autowired
-    private UserBo userBo;
-	
+	private UserBo userBo;
+
 	@Autowired
 	private HashCode hashCode;
-	
-	@RequestMapping(value="admin/adminUsers", method = RequestMethod.GET)
-    public ModelAndView listUsers(@ModelAttribute("user") User user) {    	
-    	ModelAndView model = new ModelAndView("admin/adminUsers");
-    	List<User> usersList = userBo.listUser();    	
-    	model.addObject("userslist", usersList);
-    	
+
+	@RequestMapping(value = "admin/adminUsers", method = RequestMethod.GET)
+	public ModelAndView listUsers(@ModelAttribute("user") User user) {
+		ModelAndView model = new ModelAndView("admin/adminUsers");
+		List<User> usersList = userBo.listUser();
+		model.addObject("userslist", usersList);
+
 		return model;
-    }
-    
-    @RequestMapping(value="admin/adminUserDelete", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("user") User user) {
-    	userBo.delete(user);
+	}
+
+	@RequestMapping(value = "admin/adminUserDelete", method = RequestMethod.POST)
+	public String deleteUser(@ModelAttribute("user") User user) {
+		userBo.delete(user);
 		return "redirect:/admin/adminUsers";
-    }
-	
-    @RequestMapping(value="admin/adminUserAddEdit", method = RequestMethod.GET)
-	public String initForm(@ModelAttribute("user") User user){
+	}
+
+	@RequestMapping(value = "admin/adminUserAddEdit", method = RequestMethod.GET)
+	public String initForm(@ModelAttribute("user") User user) {
 		return "admin/adminUserAddEdit";
 	}
-	
-	@RequestMapping(value="admin/adminUserAddEdit", method = RequestMethod.POST)
-	public String onSubmit(@ModelAttribute("user") @Valid User user, BindingResult result, SessionStatus status) {
- 	
+
+	@RequestMapping(value = "admin/adminUserAddEdit", method = RequestMethod.POST)
+	public String onSubmit(@ModelAttribute("user") @Valid User user,
+			BindingResult result, SessionStatus status) {
+
 		if (result.hasErrors()) {
 			System.out.print("Je tam chyba");
 			return "admin/adminUserAddEdit";
 		} else {
 			status.setComplete();
-			
-			if(user.getUserid()==-1) {
+
+			if (user.getUserid() == -1) {
 				user.setPassword(hashCode.getHashPassword(user.getPassword()));
 				userBo.save(user);
 			} else {
@@ -65,5 +66,5 @@ public class AdminUsersController {
 			return "redirect:/admin/adminUsers";
 		}
 	}
-	
+
 }

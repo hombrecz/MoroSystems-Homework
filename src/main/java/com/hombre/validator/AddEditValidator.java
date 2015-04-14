@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.hombre.db.model.User;
 
-public class AddEditValidator implements Validator{
+public class AddEditValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -15,7 +15,8 @@ public class AddEditValidator implements Validator{
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {	
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username","required.username", "Field username is required.");
+	public void validate(Object target, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username",
+				"required.username", "Field username is required.");
 	}
 }

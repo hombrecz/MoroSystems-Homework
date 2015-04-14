@@ -15,39 +15,38 @@ import com.hombre.db.bo.UserBo;
 
 @Controller
 public class OldViewController {
-	
+
 	@Autowired
-    private UserBo userBo;
-	
+	private UserBo userBo;
+
 	@RequestMapping(value = "/oldView", method = RequestMethod.POST)
 	public ModelAndView getdata() {
 
-		String mystring =getString();
+		String mystring = getString();
 		Date mydate = getDate();
 		List<String> mylist = getList();
 		HashMap<String, Double> myhmap = getHashMap();
-		
+
 		ModelAndView model = new ModelAndView("oldView");
-		
+
 		model.addObject("string", mystring);
 		model.addObject("date", mydate);
 		model.addObject("lists", mylist);
 		model.addObject("hashmaps", myhmap);
-		
+
 		return model;
- 
+
 	}
-	
-		
+
 	private String getString() {
 		return "This is the string!";
 	}
-	
+
 	private Date getDate() {
 		Date date = new Date();
 		return date;
 	}
-	
+
 	private List<String> getList() {
 		List<String> list = new ArrayList<String>();
 		list.add("List A");
@@ -59,7 +58,7 @@ public class OldViewController {
 		list.add("List 3");
 		return list;
 	}
-	
+
 	private HashMap<String, Double> getHashMap() {
 		HashMap<String, Double> hmap = new HashMap<String, Double>();
 		hmap.put("HM_data_1", new Double(111.22));
@@ -69,5 +68,5 @@ public class OldViewController {
 		hmap.put("HM_data_5", new Double(-111.222));
 		return hmap;
 	}
-			
+
 }

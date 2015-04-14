@@ -10,19 +10,21 @@
 	<br />
 	<spring:message code="various.hello" text="default hello" />
 	<br />
-	
+
 	<fmt:formatDate type="both" dateStyle="short" timeStyle="short"
 		value="${timeActual}" />
-		
+
 	<c:choose>
 		<c:when test="${usersCount == 1}">
-			<spring:message code="various.there_is"/> ${usersCount} <spring:message code="various.user_in_db"/>
+			<spring:message code="various.there_is" /> ${usersCount} <spring:message
+				code="various.user_in_db" />
 		</c:when>
 		<c:when test="${usersCount > 1}">
-			<spring:message code="various.there_are"/> ${usersCount} <spring:message code="various.users_in_db"/>
+			<spring:message code="various.there_are" /> ${usersCount} <spring:message
+				code="various.users_in_db" />
 		</c:when>
 		<c:otherwise>
-			<spring:message code="various.there_is_not"/>
+			<spring:message code="various.there_is_not" />
 		</c:otherwise>
 	</c:choose>
 

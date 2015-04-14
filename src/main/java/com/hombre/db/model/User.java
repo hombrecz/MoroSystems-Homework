@@ -25,8 +25,9 @@ import com.hombre.db.model.Book;
 import com.hombre.db.model.Role;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "userid", "username" }))
-public class User{
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"userid", "username" }))
+public class User {
 	private Integer userid;
 	private String username;
 	private String password;
@@ -36,25 +37,27 @@ public class User{
 	private List<Role> role;
 	private Integer favorite_book_id;
 	private Integer favorite_account_id;
-	
-	public User() {		
+
+	public User() {
 	}
-	
-	public User(Integer userid, String username, String password, boolean enabled) {
+
+	public User(Integer userid, String username, String password,
+			boolean enabled) {
 		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
-	
-	public User(Integer userid, String username, String password, boolean enabled, List<Role> role) {
+
+	public User(Integer userid, String username, String password,
+			boolean enabled, List<Role> role) {
 		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.role = role;
 	}
-	
+
 	@Id
 	@NotNull
 	@GeneratedValue(strategy = IDENTITY)
@@ -66,7 +69,7 @@ public class User{
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
-	
+
 	@NotNull
 	@Size(min = 1, max = 50)
 	@Column(name = "username")
@@ -77,7 +80,7 @@ public class User{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	@NotNull
 	@Size(min = 5, max = 50)
 	@Column(name = "password")
@@ -88,19 +91,19 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@NotNull
 	@Column(name = "enabled")
 	public boolean getEnabled() {
 		return enabled;
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-		
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-	@Cascade({CascadeType.REMOVE})
+	@Cascade({ CascadeType.REMOVE })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	public List<Book> getBooks() {
 		return books;
@@ -109,10 +112,9 @@ public class User{
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
-	
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Cascade({CascadeType.REMOVE})
+	@Cascade({ CascadeType.REMOVE })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	public List<Account> getAccounts() {
 		return accounts;
@@ -121,19 +123,18 @@ public class User{
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
-	
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Cascade({CascadeType.REMOVE})
+	@Cascade({ CascadeType.REMOVE })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	public List<Role> getRole() {
 		return this.role;
 	}
- 
+
 	public void setRole(List<Role> role) {
 		this.role = role;
 	}
-	
+
 	@Column(name = "favorite_book_id")
 	public Integer getFavorite_book_id() {
 		return favorite_book_id;
@@ -142,7 +143,7 @@ public class User{
 	public void setFavorite_book_id(Integer favorite_book_id) {
 		this.favorite_book_id = favorite_book_id;
 	}
-	
+
 	@Column(name = "favorite_account_id")
 	public Integer getFavorite_account_id() {
 		return favorite_account_id;
@@ -153,5 +154,3 @@ public class User{
 	}
 
 }
-
-    	

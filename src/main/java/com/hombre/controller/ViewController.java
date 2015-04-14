@@ -11,17 +11,17 @@ import com.hombre.db.model.User;
 
 @Controller
 public class ViewController {
-	
+
 	@Autowired
-    private UserBo userBo;
-	
+	private UserBo userBo;
+
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public ModelAndView getdata(int userID) {
 
 		ModelAndView model = new ModelAndView("view");
 
 		User queriedUser = userBo.getUserById(userID);
-		if (queriedUser!=null) {
+		if (queriedUser != null) {
 			model.addObject("user", queriedUser);
 			model.addObject("status", "ok");
 		} else {
@@ -30,5 +30,5 @@ public class ViewController {
 
 		return model;
 	}
-		
+
 }
