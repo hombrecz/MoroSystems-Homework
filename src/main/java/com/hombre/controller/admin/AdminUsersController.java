@@ -51,7 +51,6 @@ public class AdminUsersController {
 			BindingResult result, SessionStatus status) {
 
 		if (result.hasErrors()) {
-			System.out.print("Je tam chyba");
 			return "admin/adminUserAddEdit";
 		} else {
 			status.setComplete();

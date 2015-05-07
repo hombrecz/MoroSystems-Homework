@@ -32,12 +32,8 @@ public class AddEditController {
 	@RequestMapping(value = "/addedit", method = RequestMethod.POST)
 	public String onSubmit(@Valid @ModelAttribute("user") User user,
 			BindingResult result, SessionStatus status) {
-		System.out.println(result);
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
 
 		if (result.hasErrors()) {
-			System.out.print("Je tam chyba!");
 			return "addedit";
 		} else {
 			status.setComplete();

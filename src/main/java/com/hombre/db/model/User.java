@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,6 +21,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.hombre.db.model.Account;
 import com.hombre.db.model.Book;
@@ -71,6 +74,7 @@ public class User {
 	}
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 1, max = 50)
 	@Column(name = "username")
 	public String getUsername() {
@@ -82,6 +86,7 @@ public class User {
 	}
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 5, max = 50)
 	@Column(name = "password")
 	public String getPassword() {
