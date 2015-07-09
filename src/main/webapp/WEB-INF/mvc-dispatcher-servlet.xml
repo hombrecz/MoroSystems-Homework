@@ -29,6 +29,7 @@
 		com.hombre.startup
 		" />
 
+    <!-- IOC  example - bean userBarInterceptor + singleton example (default to Spring)-->
 	<bean id="userBarInterceptor" class="com.hombre.interceptor.userBarInterceptor" />
 	<bean id="hashCode" class="com.hombre.security.HashCode"></bean>
 
@@ -49,14 +50,13 @@
 	</bean>
 
 	<util:properties id="generalConfiguration"
-		location="/WEB-INF/resources/conf.properties" />
+		location="classpath:config.properties" />
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>/WEB-INF/resources/database.properties</value>
-				<value>/WEB-INF/resources/conf.properties</value>
+				<value>classpath:config.properties</value>
 			</list>
 		</property>
 	</bean>
