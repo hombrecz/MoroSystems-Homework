@@ -19,19 +19,22 @@ public class RoleBoImpl implements RoleBo {
 		this.roleDao = roleDao;
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void save(Role role) {
 		roleDao.save(role);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void update(Role role) {
 		roleDao.update(role);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void delete(Role role) {
-		roleDao.delete(role);
+		roleDao.remove(role);
 	}
 
 }

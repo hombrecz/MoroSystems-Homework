@@ -2,6 +2,7 @@ package com.hombre.controller.admin;
 
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,8 +22,6 @@ import com.hombre.db.model.Book;
 import com.hombre.db.model.User;
 import com.hombre.propertyeditor.AccountEditor;
 import com.hombre.propertyeditor.BookEditor;
-
-import org.junit.Test;
 
 @Controller
 public class AdminUserDetailController {
@@ -51,9 +50,9 @@ public class AdminUserDetailController {
 
 		int userid = user.getUserid();
 
-		List<Book> books = bookBo.listBookById(userid);
+		List<Book> books = userBo.getUserById(userid).getBooks();
 		model.addObject("books", books);
-		List<Account> accounts = accountBo.listAccountById(userid);
+		List<Account> accounts = userBo.getUserById(userid).getAccounts();
 		model.addObject("accounts", accounts);
 		return model;
 
@@ -145,7 +144,7 @@ public class AdminUserDetailController {
 	public String addBook(@ModelAttribute("user") User user) {
 		bookBo.save(new Book("Book Title", "Book Description", userBo
 				.getUserById(user.getUserid())));
-		List<Book> helpbooks = bookBo.listBookById(user.getUserid());
+		List<Book> helpbooks = userBo.getUserById(user.getUserid()).getBooks();
 		int help = helpbooks.get(0).getId();
 		return "redirect:/admin/adminUserDetailAddEditBook?id=" + help
 				+ "&title=Book Title&description=Book Description&user.userid="
@@ -157,8 +156,7 @@ public class AdminUserDetailController {
 	public String addAccount(@ModelAttribute("user") User user) {
 		accountBo.save(new Account("Account name", 123456, 1234567890, 1234,
 				userBo.getUserById(user.getUserid())));
-		List<Account> helpaccounts = accountBo
-				.listAccountById(user.getUserid());
+		List<Account> helpaccounts = userBo.getUserById(user.getUserid()).getAccounts();
 		int help = helpaccounts.get(0).getId();
 		return "redirect:/admin/adminUserDetailAddEditAccount?id="
 				+ help

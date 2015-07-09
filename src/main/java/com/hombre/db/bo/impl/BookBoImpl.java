@@ -1,7 +1,5 @@
 package com.hombre.db.bo.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,29 +19,28 @@ public class BookBoImpl implements BookBo {
 		this.bookDao = bookDao;
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void save(Book book) {
 		bookDao.save(book);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void update(Book book) {
 		bookDao.update(book);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void delete(Book book) {
-		bookDao.delete(book);
+		bookDao.remove(book);
 	}
 
-	@Transactional
-	public List<Book> listBookById(int id) {
-		return bookDao.listBookById(id);
-	}
-
-	@Transactional
+	@Override
+    @Transactional
 	public Book getBookById(int id) {
-		return bookDao.getBookById(id);
+		return bookDao.getByID((long)id);
 	}
 
 }

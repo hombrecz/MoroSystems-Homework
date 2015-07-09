@@ -1,7 +1,5 @@
 package com.hombre.db.bo.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,29 +19,28 @@ public class AccountBoImpl implements AccountBo {
 		this.accountDao = accountDao;
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void save(Account account) {
 		accountDao.save(account);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void update(Account account) {
 		accountDao.update(account);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void delete(Account account) {
-		accountDao.delete(account);
+		accountDao.remove(account);
 	}
 
-	@Transactional
-	public List<Account> listAccountById(int id) {
-		return accountDao.listAccountById(id);
-	}
-
-	@Transactional
+	@Override
+    @Transactional
 	public Account getAccountById(int id) {
-		return accountDao.getAccountById(id);
+		return accountDao.getByID((long)id);
 	}
 
 }

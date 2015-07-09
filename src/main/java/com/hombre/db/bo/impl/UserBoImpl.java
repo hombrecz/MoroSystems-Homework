@@ -21,30 +21,35 @@ public class UserBoImpl implements UserBo {
 		this.userDao = userDao;
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void save(User user) {
 		userDao.save(user);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void update(User user) {
 		userDao.update(user);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public void delete(User user) {
-		userDao.delete(user);
+		userDao.remove(user);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public User getUserById(int id) {
-		return userDao.getUserById(id);
+		return userDao.getByID((long)id);
 	}
 
-	@Transactional
+	@Override
+    @Transactional
 	public List<User> listUser() {
 
-		return userDao.listUser();
+		return userDao.getAll();
 	}
 
 }
