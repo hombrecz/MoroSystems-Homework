@@ -40,7 +40,7 @@ public class AccountBoImpl implements AccountBo {
 	@Override
     @Transactional
 	public Account getAccountById(int id) {
-		return accountDao.getByID((long)id);
+		return accountDao.getByID(id);
 	}
 
 }

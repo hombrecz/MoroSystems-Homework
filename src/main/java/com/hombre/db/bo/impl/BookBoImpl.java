@@ -40,7 +40,7 @@ public class BookBoImpl implements BookBo {
 	@Override
     @Transactional
 	public Book getBookById(int id) {
-		return bookDao.getByID((long)id);
+		return bookDao.getByID(id);
 	}
 
 }

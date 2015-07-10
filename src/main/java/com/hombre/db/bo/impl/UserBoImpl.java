@@ -42,7 +42,7 @@ public class UserBoImpl implements UserBo {
 	@Override
     @Transactional
 	public User getUserById(int id) {
-		return userDao.getByID((long)id);
+		return userDao.getByID(id);
 	}
 
 	@Override

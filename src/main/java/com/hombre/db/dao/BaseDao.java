@@ -13,6 +13,6 @@ public interface BaseDao<T, ID extends Serializable> {
 
     List<T> getAll();
 
-    T getByID(ID id);
+    T getByID(Integer id);
 
 }
