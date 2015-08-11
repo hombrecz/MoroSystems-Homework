@@ -72,6 +72,16 @@
 		</form:form>
 	</table>
 
+	<h4>Send book list to my e-mail</h4>
+	<form:form method="post" modelAttribute="user"
+		action="adminUserDetailSendBookList">
+		<tr>
+			<form:input type="hidden" path="userid" value="${user.userid}" />
+			<td><input type="submit" value="Send"></td>
+			<td>&nbsp;</td>
+		</tr>
+	</form:form>
+
 
 	<h3>Accounts</h3>
 	<table class="data">
