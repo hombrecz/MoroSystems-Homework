@@ -1,5 +1,7 @@
 package com.hombre.startup;
 
+import java.text.ParseException;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,12 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
     public void onApplicationEvent(ContextRefreshedEvent arg0) {}
 
     @PostConstruct
-    public void init() {
+    public void init() throws ParseException {
         fillInitialData();
     }
 
-    private void fillInitialData() {
+    private void fillInitialData() throws ParseException {
+
         User newUser = new User(1, "Ondrej", hashCode.getHashPassword("andrew"), true);
         userBo.save(newUser);
         roleBo.save(new Role(newUser, "ROLE_ADMIN"));
@@ -56,6 +59,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         Account account = new Account("MyAccount2", 111112, 1234567891, 4343, newUser);
         accountBo.save(account);
         newUser.setFavorite_account_id(account.getId());
+        newUser.setBirthdate("07-07-1997");
         userBo.update(newUser);
 
         newUser = new User(2, "Daniela", hashCode.getHashPassword("danielle"), true);
@@ -65,6 +69,9 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         bookBo.save(new Book("BookOfDanielle2", "Danielle's book no.2", newUser));
         accountBo.save(new Account("AccountDanielle1", 222222, 1212121212, 2121, newUser));
         accountBo.save(new Account("AccountDanielle2", 222223, 1212121213, 2121, newUser));
+        newUser.setFavorite_account_id(account.getId());
+        newUser.setBirthdate("08-08-1998");
+        userBo.update(newUser);
 
         newUser = new User(3, "Jan", hashCode.getHashPassword("johny"), true);
         userBo.save(newUser);
@@ -73,6 +80,9 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         bookBo.save(new Book("BookOfJohn2", "John's book no.2", newUser));
         accountBo.save(new Account("AccountJohn1", 332211, 33445533, 4321, newUser));
         accountBo.save(new Account("AccountJohn2", 112233, 33444455, 4343, newUser));
+        newUser.setFavorite_account_id(account.getId());
+        newUser.setBirthdate("09-09-1999");
+        userBo.update(newUser);
 
         newUser = new User(4, "Veronika", hashCode.getHashPassword("veronica"), true);
         userBo.save(newUser);
@@ -81,6 +91,9 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         bookBo.save(new Book("BookOfVeronica2", "Veronica's book no.2", newUser));
         accountBo.save(new Account("AccountVeronica1", 332233, 33665544, 4321, newUser));
         accountBo.save(new Account("AccountVeronica2", 112211, 19876543, 2121, newUser));
+        newUser.setFavorite_account_id(account.getId());
+        newUser.setBirthdate("10-10-2000");
+        userBo.update(newUser);
     }
 
 }

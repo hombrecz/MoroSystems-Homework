@@ -33,6 +33,7 @@
 <body>
 	<mytags:userbar />
 	<h2>Moro Systems Task1 - admin users</h2>
+	
 	<form:form method="post" modelAttribute="user"
 		action="adminUserAddEdit">
 
@@ -41,12 +42,27 @@
 			<tr>
 				<td>UserName:</td>
 				<td><form:input type="hidden" path="userid"
-						value="${user.userid}" />
-					<form:input path="username" value="${user.username}" title="Write your username here."/></td>
+						value="${user.userid}" /> <form:input path="username"
+						value="${user.username}" title="Write your username here." /></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><form:input path="password" value="${user.password}" title="Here goes your super secret password."/></td>
+				<td><form:input path="password" value="${user.password}"
+						title="Here goes your super secret password." /></td>
+			</tr>
+			<tr>
+				<td>Birth date:</td>
+				<td><form:input path="birthdate" type="text" id="datepicker"
+						value="${user.birthdate}" title="Please select your birthdate." /></td>
+				<script>
+					$(function() {
+						$( "#datepicker" ).datepicker({
+				            changeMonth: true, 
+				            changeYear: true ,
+				            dateFormat: 'dd-mm-yy'
+						});
+					});
+				</script>
 			</tr>
 			<!--  <tr>
 					<td>Role: </td>
@@ -59,11 +75,13 @@
 				</tr>-->
 			<tr>
 				<td>Enabled:</td>
-				<td><form:checkbox path="enabled" value="${user.enabled}" title="Check this to enable this user."/></td>
+				<td><form:checkbox path="enabled" value="${user.enabled}"
+						title="Check this to enable this user." /></td>
 			</tr>
 			<tr>
 				<td><form:errors path="username" cssClass="error" /></td>
-				<td colspan="3"><input type="submit" value="Save user" title="Submit your new user." /></td>
+				<td colspan="3"><input type="submit" value="Save user"
+					title="Submit your new user." /></td>
 			</tr>
 		</table>
 	</form:form>
