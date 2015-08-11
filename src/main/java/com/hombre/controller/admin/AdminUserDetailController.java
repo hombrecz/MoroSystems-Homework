@@ -1,8 +1,12 @@
 package com.hombre.controller.admin;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +32,16 @@ import com.hombre.db.model.User;
 import com.hombre.propertyeditor.AccountEditor;
 import com.hombre.propertyeditor.BookEditor;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 @Controller
 public class AdminUserDetailController {
 
+    @Autowired
+    private ServletContext servletContext;
+    
     @Autowired
     private BookBo bookBo;
 
@@ -147,21 +158,29 @@ public class AdminUserDetailController {
 
     @RequestMapping(value = "admin/adminUserDetailSendBookList", method = RequestMethod.POST)
     public String  sendBookList (@ModelAttribute("user") User user, @ModelAttribute("book") Book book,
-                    @ModelAttribute("account") Account account){
+                    @ModelAttribute("account") Account account) throws IOException, TemplateException{
         int userid = user.getUserid();
         user = userBo.getUserById(userid);
+        
+        Configuration configurer = new Configuration();
+        configurer.setServletContextForTemplateLoading(servletContext, "WEB-INF/templates"); 
+        
+        Template template = configurer.getTemplate("mail.ftl");
         
         Map<String, Object> context = new HashMap<String, Object>();
         context.put("username", user.getUsername());
         context.put("books", user.getBooks());
         
+        StringWriter output = new StringWriter();
+        template.process(context, output);
+        
         MailSender mailSender = new JavaMailSenderImpl();
         SimpleMailMessage message = new SimpleMailMessage();
         
         message.setFrom("Example Server" + " <" + "example@test.cz" + ">");
-        message.setTo(user.getUsername()+"@test.cz");
+        message.setTo(user.getUsername().toLowerCase()+"@test.cz");
         message.setSubject("Your booklist");
-        message.setText("Zprava");
+        message.setText(output.toString());
 
         mailSender.send(message);
         
