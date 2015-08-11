@@ -21,6 +21,12 @@
 	margin: 16px;
 }
 </style>
+<script>
+	$(function() {
+		$(document).tooltip();
+	});
+</script>
+
 <title>Moro System - Task1</title>
 </head>
 
@@ -35,12 +41,12 @@
 			<tr>
 				<td>UserName:</td>
 				<td><form:input type="hidden" path="userid"
-						value="${user.userid}" /> <form:input path="username"
-						value="${user.username}" /></td>
+						value="${user.userid}" />
+					<form:input path="username" value="${user.username}" title="Write your username here."/></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><form:input path="password" value="${user.password}" /></td>
+				<td><form:input path="password" value="${user.password}" title="Here goes your super secret password."/></td>
 			</tr>
 			<!--  <tr>
 					<td>Role: </td>
@@ -53,11 +59,11 @@
 				</tr>-->
 			<tr>
 				<td>Enabled:</td>
-				<td><form:checkbox path="enabled" value="${user.enabled}" /></td>
+				<td><form:checkbox path="enabled" value="${user.enabled}" title="Check this to enable this user."/></td>
 			</tr>
 			<tr>
 				<td><form:errors path="username" cssClass="error" /></td>
-				<td colspan="3"><input type="submit" value="Save user" /></td>
+				<td colspan="3"><input type="submit" value="Save user" title="Submit your new user." /></td>
 			</tr>
 		</table>
 	</form:form>
