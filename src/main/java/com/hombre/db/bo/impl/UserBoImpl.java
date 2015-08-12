@@ -44,6 +44,12 @@ public class UserBoImpl implements UserBo {
 	public User getUserById(int id) {
 		return userDao.getByID(id);
 	}
+	
+	@Override
+	@Transactional
+	public List<User> getUserByMailFreq(String freq) {
+	    return userDao.getByMailFreq(freq);
+	}
 
 	@Override
     @Transactional

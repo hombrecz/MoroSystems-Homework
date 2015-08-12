@@ -35,6 +35,7 @@ public class User {
     private Integer favorite_book_id;
     private Integer favorite_account_id;
     private String birthdate;
+    private String mailFrequency;
 
     public User() {}
 
@@ -166,6 +167,15 @@ public class User {
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+    
+    @Column(name = "mail_frequency")
+    public String getMailFrequency() {
+        return mailFrequency;
+    }
+
+    public void setMailFrequency(String mailFrequency) {
+        this.mailFrequency = mailFrequency;
     }
 
 }

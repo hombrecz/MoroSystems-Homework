@@ -1,116 +1,163 @@
 <?xml  version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+ xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        ">
 
-	<mvc:annotation-driven />
-	<context:annotation-config />
-	<context:component-scan
-		base-package="
+ <context:annotation-config />
+ <context:component-scan
+  base-package="
 		com.hombre.controller,
 		com.hombre.controller.admin,
 		com.hombre.db,
 		com.hombre.form,
 		com.hombre.interceptor,
+        com.hombre.mailservice,
 		com.hombre.propertyeditor,
-		com.hombre.validator
-		com.hombre.security
-		com.hombre.startup
+		com.hombre.security,
+        com.hombre.scheduler,
+		com.hombre.startup,
+		com.hombre.validator        
 		" />
 
-    <!-- IOC  example - bean userBarInterceptor + singleton example (default to Spring)-->
-	<bean id="userBarInterceptor" class="com.hombre.interceptor.userBarInterceptor" />
-	<bean id="hashCode" class="com.hombre.security.HashCode"></bean>
+ <!-- IOC example - bean userBarInterceptor + singleton example (default 
+  to Spring) -->
+ <bean id="userBarInterceptor" class="com.hombre.interceptor.userBarInterceptor" />
+ <bean id="hashCode" class="com.hombre.security.HashCode"></bean>
 
-	<bean id="handlerMapping"
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="interceptors">
-			<list>
-				<ref bean="userBarInterceptor" />
-				<ref bean="localeChangeInterceptor" />
-			</list>
-		</property>
-	</bean>
+ <bean id="handlerMapping"
+  class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+  <property name="interceptors">
+   <list>
+    <ref bean="userBarInterceptor" />
+    <ref bean="localeChangeInterceptor" />
+   </list>
+  </property>
+ </bean>
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+ <bean
+  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="prefix" value="/WEB-INF/pages/" />
+  <property name="suffix" value=".jsp" />
+ </bean>
 
-	<util:properties id="generalConfiguration"
-		location="classpath:config.properties" />
+ <util:properties id="generalConfiguration" location="classpath:config.properties" />
 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:config.properties</value>
-			</list>
-		</property>
-	</bean>
+ <bean id="propertyConfigurer"
+  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="locations">
+   <list>
+    <value>classpath:config.properties</value>
+   </list>
+  </property>
+ </bean>
 
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.databaseurl}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
+ <bean id="dataSource"
+  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+  <property name="driverClassName" value="${jdbc.driverClassName}" />
+  <property name="url" value="${jdbc.databaseurl}" />
+  <property name="username" value="${jdbc.username}" />
+  <property name="password" value="${jdbc.password}" />
+ </bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation">
-			<value>classpath:hibernate/hibernate.cfg.xml</value>
-		</property>
-		<property name="configurationClass">
-			<value>org.hibernate.cfg.AnnotationConfiguration</value>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-			</props>
-		</property>
-	</bean>
+ <bean id="sessionFactory"
+  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <property name="dataSource" ref="dataSource" />
+  <property name="configLocation">
+   <value>classpath:hibernate/hibernate.cfg.xml</value>
+  </property>
+  <property name="configurationClass">
+   <value>org.hibernate.cfg.AnnotationConfiguration</value>
+  </property>
+  <property name="hibernateProperties">
+   <props>
+    <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+    <prop key="hibernate.show_sql">true</prop>
+    <prop key="hibernate.hbm2ddl.auto">create</prop>
+   </props>
+  </property>
+ </bean>
 
-	<tx:annotation-driven />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+ <tx:annotation-driven />
 
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:example"></property>
-		<property name="defaultEncoding" value="UTF-8">
-		</property>
-	</bean>
+ <bean id="transactionManager"
+  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
 
-	<bean id="localeChangeInterceptor"
-		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-		<property name="paramName" value="lang">
-		</property>
-	</bean>
+ <bean id="messageSource"
+  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+  <property name="basename" value="classpath:example"></property>
+  <property name="defaultEncoding" value="UTF-8">
+  </property>
+ </bean>
 
-	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-		<property name="defaultLocale" value="en">
-		</property>
-	</bean>
+ <bean id="localeChangeInterceptor"
+  class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+  <property name="paramName" value="lang">
+  </property>
+ </bean>
+
+ <bean id="localeResolver"
+  class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+  <property name="defaultLocale" value="en">
+  </property>
+ </bean>
+
+ <bean id="runMeJob1" class="com.hombre.scheduler.RunMeJob1" />
+ <bean id="runMeJob7" class="com.hombre.scheduler.RunMeJob7" />
+ <bean id="runMeJob30" class="com.hombre.scheduler.RunMeJob30" />
+
+ <bean name="RunMeJob1" class="org.springframework.scheduling.quartz.JobDetailBean">
+  <property name="jobClass" value="com.hombre.scheduler.RunMeJob1" />
+ </bean>
+
+ <bean name="RunMeJob7" class="org.springframework.scheduling.quartz.JobDetailBean">
+  <property name="jobClass" value="com.hombre.scheduler.RunMeJob7" />
+ </bean>
+
+ <bean name="RunMeJob30" class="org.springframework.scheduling.quartz.JobDetailBean">
+  <property name="jobClass" value="com.hombre.scheduler.RunMeJob30" />
+ </bean>
+
+ <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="RunMeJob1" />
+  <property name="cronExpression" value="0 0 12 1/1 * ? *"  />
+<!--   <property name="cronExpression" value="0/1 * * * * ?"   /> -->
+ </bean>
+
+ <bean id="cronTrigger7" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="RunMeJob7" />
+  <property name="cronExpression" value="0 0 12 ? * MON *" />
+<!--   <property name="cronExpression" value="0/7 * * * * ?"   /> -->
+ </bean>
+
+ <bean id="cronTrigger30" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="RunMeJob30" />
+  <property name="cronExpression" value="0 0 12 1 1/1 ? *" />
+<!--   <property name="cronExpression" value="0/30 * * * * ?"   /> -->
+ </bean>
+
+ <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+  <property name="triggers">
+   <list>
+    <ref bean="cronTrigger1" />
+    <ref bean="cronTrigger7" />
+    <ref bean="cronTrigger30" />
+   </list>
+  </property>
+ </bean>
 
 </beans>

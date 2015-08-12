@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +37,19 @@ public class UserDaoImpl extends BaseDaoImpl<User, Long> implements UserDao {
             Hibernate.initialize(user.getRole());
         }
         return user;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<User> getByMailFreq(String freq) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where mailFrequency = :freq ");
+        query.setParameter("freq", freq);
+        List<User> users = query.list();
+        for (Iterator<User> i = users.iterator(); i.hasNext();) {
+            User item = i.next();
+            Hibernate.initialize(item.getAccounts());
+            Hibernate.initialize(item.getRole());
+        }
+        return users;
     }
 }

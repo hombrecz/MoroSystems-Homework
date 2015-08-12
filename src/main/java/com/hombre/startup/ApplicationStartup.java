@@ -60,6 +60,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         accountBo.save(account);
         newUser.setFavorite_account_id(account.getId());
         newUser.setBirthdate("07-07-1997");
+        newUser.setMailFrequency("1");
         userBo.update(newUser);
 
         newUser = new User(2, "Daniela", hashCode.getHashPassword("danielle"), true);
@@ -71,6 +72,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         accountBo.save(new Account("AccountDanielle2", 222223, 1212121213, 2121, newUser));
         newUser.setFavorite_account_id(account.getId());
         newUser.setBirthdate("08-08-1998");
+        newUser.setMailFrequency("1");
         userBo.update(newUser);
 
         newUser = new User(3, "Jan", hashCode.getHashPassword("johny"), true);
@@ -82,6 +84,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         accountBo.save(new Account("AccountJohn2", 112233, 33444455, 4343, newUser));
         newUser.setFavorite_account_id(account.getId());
         newUser.setBirthdate("09-09-1999");
+        newUser.setMailFrequency("7");
         userBo.update(newUser);
 
         newUser = new User(4, "Veronika", hashCode.getHashPassword("veronica"), true);
@@ -93,6 +96,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         accountBo.save(new Account("AccountVeronica2", 112211, 19876543, 2121, newUser));
         newUser.setFavorite_account_id(account.getId());
         newUser.setBirthdate("10-10-2000");
+        newUser.setMailFrequency("30");
         userBo.update(newUser);
     }
 

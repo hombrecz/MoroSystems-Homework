@@ -1,18 +1,12 @@
 package com.hombre.controller.admin;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,11 +23,10 @@ import com.hombre.db.bo.UserBo;
 import com.hombre.db.model.Account;
 import com.hombre.db.model.Book;
 import com.hombre.db.model.User;
+import com.hombre.mailservice.ApplicationMailer;
 import com.hombre.propertyeditor.AccountEditor;
 import com.hombre.propertyeditor.BookEditor;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 @Controller
@@ -157,33 +150,12 @@ public class AdminUserDetailController {
     }
 
     @RequestMapping(value = "admin/adminUserDetailSendBookList", method = RequestMethod.POST)
-    public String  sendBookList (@ModelAttribute("user") User user, @ModelAttribute("book") Book book,
-                    @ModelAttribute("account") Account account) throws IOException, TemplateException{
+    public String  sendBookList (@ModelAttribute("user") User user) throws IOException, TemplateException{
         int userid = user.getUserid();
         user = userBo.getUserById(userid);
         
-        Configuration configurer = new Configuration();
-        configurer.setServletContextForTemplateLoading(servletContext, "WEB-INF/templates"); 
-        
-        Template template = configurer.getTemplate("mail.ftl");
-        
-        Map<String, Object> context = new HashMap<String, Object>();
-        context.put("username", user.getUsername());
-        context.put("books", user.getBooks());
-        
-        StringWriter output = new StringWriter();
-        template.process(context, output);
-        
-        MailSender mailSender = new JavaMailSenderImpl();
-        SimpleMailMessage message = new SimpleMailMessage();
-        
-        message.setFrom("Example Server" + " <" + "example@test.cz" + ">");
-        message.setTo(user.getUsername().toLowerCase()+"@test.cz");
-        message.setSubject("Your booklist");
-        message.setText(output.toString());
-
-        mailSender.send(message);
-        
+        ApplicationMailer.sendMail(user, servletContext);
+             
         return "redirect:/admin/adminUserDetail?userid=" + user.getUserid() + "&username=" + user.getUsername()
                 + "&enabled=" + user.getEnabled();
     }

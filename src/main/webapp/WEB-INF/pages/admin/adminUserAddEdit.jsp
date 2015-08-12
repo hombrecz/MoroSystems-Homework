@@ -33,7 +33,7 @@
 <body>
 	<mytags:userbar />
 	<h2>Moro Systems Task1 - admin users</h2>
-	
+
 	<form:form method="post" modelAttribute="user"
 		action="adminUserAddEdit">
 
@@ -56,13 +56,23 @@
 						value="${user.birthdate}" title="Please select your birthdate." /></td>
 				<script>
 					$(function() {
-						$( "#datepicker" ).datepicker({
-				            changeMonth: true, 
-				            changeYear: true ,
-				            dateFormat: 'dd-mm-yy'
+						$("#datepicker").datepicker({
+							changeMonth : true,
+							changeYear : true,
+							dateFormat : 'dd-mm-yy'
 						});
 					});
 				</script>
+			</tr>
+			<tr>
+				<td>Mail sender frequency:</td>
+				<td><form:select path="mailFrequency"
+						title="Frequency is in days">
+						<form:option value="0">Don't send me mail</form:option>
+						<form:option value="1">Daily</form:option>
+						<form:option value="7">Weekly</form:option>
+						<form:option value="30">Monthly</form:option>
+					</form:select></td>
 			</tr>
 			<!--  <tr>
 					<td>Role: </td>

@@ -12,6 +12,8 @@ public interface UserBo {
 	void delete(User user);
 
 	User getUserById(int id);
+	
+	List<User> getUserByMailFreq(String freq);
 
 	List<User> listUser();
 
