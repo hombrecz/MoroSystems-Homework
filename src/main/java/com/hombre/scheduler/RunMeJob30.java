@@ -10,6 +10,7 @@ import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.hombre.db.bo.UserBo;
 import com.hombre.db.model.User;
@@ -28,6 +29,7 @@ public class RunMeJob30 extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         System.out.println("Job30");
         List<User> users = userBo.getUserByMailFreq("30");
         

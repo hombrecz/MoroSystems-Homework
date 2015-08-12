@@ -9,7 +9,6 @@ My project for testing various technologies:
 	JQuery
 
 ToDo:
-- quartz is not sending mails - UserBo is null
 - design - use bootstrap (header, css)
 	- header/template of all jsp loaded from template (tag)
 	- functional menu
