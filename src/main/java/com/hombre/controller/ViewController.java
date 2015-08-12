@@ -12,23 +12,25 @@ import com.hombre.db.model.User;
 @Controller
 public class ViewController {
 
-	@Autowired
-	private UserBo userBo;
+    @Autowired
+    private UserBo userBo;
 
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public ModelAndView getdata(int userID) {
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView getData(int userID) {
 
-		ModelAndView model = new ModelAndView("view");
+        ModelAndView model = new ModelAndView("view");
+        
+        User queriedUser = userBo.getUserById(userID);
+        if (queriedUser != null) {
+            model.addObject("user", queriedUser);
+            model.addObject("status", "ok");
+            model.addObject("userID", userID);
+        } else {
+            model.addObject("status", "null");
+        }
 
-		User queriedUser = userBo.getUserById(userID);
-		if (queriedUser != null) {
-			model.addObject("user", queriedUser);
-			model.addObject("status", "ok");
-		} else {
-			model.addObject("status", "null");
-		}
+        return model;
+    }
 
-		return model;
-	}
 
 }

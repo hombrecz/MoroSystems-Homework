@@ -1,7 +1,7 @@
 package com.hombre.controller;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,24 +19,24 @@ public class OldViewController {
 	@Autowired
 	private UserBo userBo;
 
-	@RequestMapping(value = "/oldView", method = RequestMethod.POST)
-	public ModelAndView getdata() {
+	@RequestMapping(value = "/oldView", method = { RequestMethod.GET, RequestMethod.POST })
+        public ModelAndView getdata() {
 
-		String mystring = getString();
-		Date mydate = getDate();
-		List<String> mylist = getList();
-		HashMap<String, Double> myhmap = getHashMap();
+                String mystring = getString();
+                Date mydate = getDate();
+                List<String> mylist = getList();
+                HashMap<String, Double> myhmap = getHashMap();
 
-		ModelAndView model = new ModelAndView("oldView");
+                ModelAndView model = new ModelAndView("oldView");
 
-		model.addObject("string", mystring);
-		model.addObject("date", mydate);
-		model.addObject("lists", mylist);
-		model.addObject("hashmaps", myhmap);
+                model.addObject("string", mystring);
+                model.addObject("date", mydate);
+                model.addObject("lists", mylist);
+                model.addObject("hashmaps", myhmap);
 
-		return model;
+                return model;
 
-	}
+        }
 
 	private String getString() {
 		return "This is the string!";

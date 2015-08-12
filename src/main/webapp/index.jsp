@@ -42,7 +42,7 @@
 				<td>2</td>
 				<td>Database</td>
 				<td>
-					<form method="post" action="view">
+					<form method="get" action="view">
 						<input type="text" name="userID" value="1"> <input
 							type="submit" value="Select user ID">
 					</form>

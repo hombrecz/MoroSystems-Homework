@@ -74,15 +74,14 @@
 						<form:option value="30">Monthly</form:option>
 					</form:select></td>
 			</tr>
-			<!--  <tr>
-					<td>Role: </td>
-					<td>
-						<form:select path="role[0].role">  
-	                		<form:option value="ROLE_USER">user</form:option>  
-	                		<form:option value="ROLE_ADMIN">admin</form:option>  
-	            		</form:select>  		
+			<tr>
+				<td>Role:</td>
+				<td><form:select multiple="true" path="role">
+						<form:option value="ROLE_USER">user</form:option>
+						<form:option value="ROLE_ADMIN">admin</form:option>
+					</form:select>
 					</td>
-				</tr>-->
+			</tr>
 			<tr>
 				<td>Enabled:</td>
 				<td><form:checkbox path="enabled" value="${user.enabled}"

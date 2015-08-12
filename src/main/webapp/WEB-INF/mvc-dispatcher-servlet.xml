@@ -134,20 +134,20 @@
 
  <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
   <property name="jobDetail" ref="RunMeJob1" />
-  <property name="cronExpression" value="0 0 12 1/1 * ? *"  />
-<!--   <property name="cronExpression" value="0/1 * * * * ?"   /> -->
+<!--   <property name="cronExpression" value="0 0 12 1/1 * ? *"  /> -->
+  <property name="cronExpression" value="0/1 * * * * ?"   />
  </bean>
 
  <bean id="cronTrigger7" class="org.springframework.scheduling.quartz.CronTriggerBean">
   <property name="jobDetail" ref="RunMeJob7" />
-  <property name="cronExpression" value="0 0 12 ? * MON *" />
-<!--   <property name="cronExpression" value="0/7 * * * * ?"   /> -->
+<!--   <property name="cronExpression" value="0 0 12 ? * MON *" /> -->
+  <property name="cronExpression" value="0/7 * * * * ?"   />
  </bean>
 
  <bean id="cronTrigger30" class="org.springframework.scheduling.quartz.CronTriggerBean">
   <property name="jobDetail" ref="RunMeJob30" />
-  <property name="cronExpression" value="0 0 12 1 1/1 ? *" />
-<!--   <property name="cronExpression" value="0/30 * * * * ?"   /> -->
+<!--   <property name="cronExpression" value="0 0 12 1 1/1 ? *" /> -->
+  <property name="cronExpression" value="0/30 * * * * ?"   />
  </bean>
 
  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

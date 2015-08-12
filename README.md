@@ -1,9 +1,18 @@
 # MoroSystems-Homework
-My project for testing Maven, Hibernate, Spring & PostgreSQL.
+My project for testing various technologies:
+	Maven
+	Hibernate
+	Spring MVC
+	PostgreSQL
+	FreeMarker
+	Quartz
+	JQuery
 
 ToDo:
-- user add/edit - zvoleni role a dropdown list
-- localization pod - 1, 2, 5
-- vzhled - pouzit bootstrap (header, css)
-	- hlavicka/sablona vsech jsp naèitana ze sablony (tag)
-	- menu pro prechody mezi jednotlivymi strankami - na kazde strance nebo tak neco	
+- quartz is not sending mails - UserBo is null
+- design - use bootstrap (header, css)
+	- header/template of all jsp loaded from template (tag)
+	- functional menu
+	
+Bugs:
+- change of locale on some pages causes error - due to switcher implementation
