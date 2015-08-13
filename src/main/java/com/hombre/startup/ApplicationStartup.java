@@ -38,9 +38,8 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
     @Autowired
     private WebApplicationContext context;
 
-//    @Autowired
-//    private HashCode hashCode;
-      //prototype stejně nefunguje :-/
+    @Autowired
+    private HashCode hashCode;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {}
@@ -54,7 +53,6 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         HashCode hashCode = (HashCode) context.getBean("hashCode");
 
         User newUser = new User(1, "Ondrej", hashCode.getHashPassword("andrew"), true);
-        System.out.println(hashCode.toString());
         userBo.save(newUser);
         roleBo.save(new Role(newUser, "ROLE_ADMIN"));
         bookBo.save(new Book("MyBook1", "My generic book no.1", newUser));
@@ -69,11 +67,8 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         newUser.setBirthdate("07-07-1997");
         newUser.setMailFrequency("1");
         userBo.merge(newUser);
-        
-        HashCode hashCode2 = (HashCode) context.getBean("hashCode");
 
-        newUser = new User(2, "Daniela", hashCode2.getHashPassword("danielle"), true);
-        System.out.println(hashCode.toString());
+        newUser = new User(2, "Daniela", hashCode.getHashPassword("danielle"), true);
         userBo.save(newUser);
         roleBo.save(new Role(newUser, "ROLE_USER"));
         bookBo.save(new Book("BookOfDanielle1", "Danielle's book no.1", newUser));
@@ -85,9 +80,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         newUser.setMailFrequency("1");
         userBo.merge(newUser);
         
-        HashCode hashCode3 = (HashCode) context.getBean("hashCode");
-        System.out.println(hashCode.toString());
-        newUser = new User(3, "Jan", hashCode3.getHashPassword("johny"), true);
+        newUser = new User(3, "Jan", hashCode.getHashPassword("johny"), true);
         userBo.save(newUser);
         roleBo.save(new Role(newUser, "ROLE_USER"));
         bookBo.save(new Book("BookOfJohn1", "John's book no.1", newUser));
@@ -99,9 +92,7 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
         newUser.setMailFrequency("7");
         userBo.merge(newUser);
 
-        HashCode hashCode4 = (HashCode) context.getBean("hashCode");
-        System.out.println(hashCode.toString());
-        newUser = new User(4, "Veronika", hashCode4.getHashPassword("veronica"), true);
+        newUser = new User(4, "Veronika", hashCode.getHashPassword("veronica"), true);
         userBo.save(newUser);
         roleBo.save(new Role(newUser, "ROLE_USER"));
         bookBo.save(new Book("BookOfVeronica1", "Veronica's book no.1", newUser));

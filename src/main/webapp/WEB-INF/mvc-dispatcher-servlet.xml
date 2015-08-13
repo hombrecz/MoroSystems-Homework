@@ -34,7 +34,8 @@
  <!-- IOC example - bean userBarInterceptor + singleton example (default 
   to Spring) -->
  <bean id="userBarInterceptor" class="com.hombre.interceptor.userBarInterceptor" />
- <bean id="hashCode" class="com.hombre.security.HashCode"></bean>
+ <bean id="hashCode" scope="prototype" class="com.hombre.security.HashCode">
+ </bean>
 
  <bean id="handlerMapping"
   class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
