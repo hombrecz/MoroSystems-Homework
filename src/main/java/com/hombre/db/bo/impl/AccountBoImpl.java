@@ -11,36 +11,43 @@ import com.hombre.db.model.Account;
 @Service
 public class AccountBoImpl implements AccountBo {
 
-	@Autowired
-	private AccountDao accountDao;
+    @Autowired
+    private AccountDao accountDao;
 
-	@Transactional
-	public void setAccountDao(AccountDao accountDao) {
-		this.accountDao = accountDao;
-	}
-
-	@Override
     @Transactional
-	public void save(Account account) {
-		accountDao.save(account);
-	}
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void update(Account account) {
-		accountDao.update(account);
-	}
+    public void save(Account account) {
+        accountDao.save(account);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void delete(Account account) {
-		accountDao.remove(account);
-	}
+    public void update(Account account) {
+        accountDao.update(account);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public Account getAccountById(int id) {
-		return accountDao.getByID(id);
-	}
+    public void delete(Account account) {
+        accountDao.remove(account);
+    }
+
+    @Override
+    @Transactional
+    public Account getAccountById(int id) {
+        return accountDao.getByID(id);
+    }
+
+    @Override
+    @Transactional
+    public void merge(Account account) {
+        accountDao.merge(account);
+
+    }
 
 }

@@ -43,7 +43,7 @@ public class AddEditController {
 				userBo.save(user);
 			} else {
 				user.setPassword(hashCode.getHashPassword(user.getPassword()));
-				userBo.update(user);
+				userBo.merge(user);
 			}
 
 			return "redirect:/users";

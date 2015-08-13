@@ -2,20 +2,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@attribute name="loggedUsername"%>
-<%@attribute name="timeActual"%>
-<%@attribute name="usersCount"%>
 
 <head>
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 </head>
 
 <div id="userbar">
 	Language : <a href="?lang=en">English</a>|<a href="?lang=cs_CS">Czech</a>
 	<br />
-	<spring:message code="various.hello" text="default hello" />
+	<fmt:message key="various.hello" />
 	<br />
 
 	<fmt:formatDate type="both" dateStyle="short" timeStyle="short"
@@ -23,15 +21,15 @@
 
 	<c:choose>
 		<c:when test="${usersCount == 1}">
-			<spring:message code="various.there_is" /> ${usersCount} <spring:message
-				code="various.user_in_db" />
+			<fmt:message key="various.there_is" /> ${usersCount} <fmt:message
+				key="various.user_in_db" />
 		</c:when>
 		<c:when test="${usersCount > 1}">
-			<spring:message code="various.there_are" /> ${usersCount} <spring:message
-				code="various.users_in_db" />
+			<fmt:message key="various.there_are" /> ${usersCount} <fmt:message
+				key="various.users_in_db" />
 		</c:when>
 		<c:otherwise>
-			<spring:message code="various.there_is_not" />
+			<fmt:message key="various.there_is_not" />
 		</c:otherwise>
 	</c:choose>
 

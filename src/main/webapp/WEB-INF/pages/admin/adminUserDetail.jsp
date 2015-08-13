@@ -55,7 +55,7 @@
 		Favorite book:	
 		<form:form method="post" modelAttribute="user"
 				action="adminUserFavoriteBook">
-				<form:select path="favorite_book_id" items="${books}"
+				<form:select path="favoriteBookId" items="${books}"
 					itemLabel="title" />
 				<form:input type="hidden" path="userid" value="${user.userid}" />
 				<input type="submit" value="Set" />
@@ -134,7 +134,7 @@
 		Preffered account:
 		<form:form method="post" modelAttribute="user"
 				action="adminUserFavoriteAccount">
-				<form:select path="favorite_account_id" items="${accounts}"
+				<form:select path="favoriteAccountId" items="${accounts}"
 					itemLabel="name" />
 				<form:input type="hidden" path="userid" value="${user.userid}" />
 				<input type="submit" value="Set" />

@@ -17,38 +17,31 @@ import com.hombre.db.bo.UserBo;
 
 public class userBarInterceptor implements HandlerInterceptor {
 
-	@Autowired
-	private UserBo userBo;
+    @Autowired
+    private UserBo userBo;
 
-	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
+        Date timeActual = new Date();
+        modelAndView.addObject("timeActual", timeActual);
 
-		Date timeActual = new Date();
-		request.setAttribute("timeActual", timeActual);
+        int usersCount = userBo.listUser().size();
 
-		int usersCount = userBo.listUser().size();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            modelAndView.addObject("loggedUsername", currentUserName);
+        }
 
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			String currentUserName = authentication.getName();
-			request.setAttribute("loggedUsername", currentUserName);
-		}
+        modelAndView.addObject("usersCount", usersCount);
+    }
 
-		request.setAttribute("usersCount", usersCount);
-		return true;
-	}
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {}
 
-	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-	}
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        return true;
+    }
 }

@@ -9,6 +9,8 @@ public interface UserBo {
 
 	void update(User user);
 
+	void merge(User user);
+
 	void delete(User user);
 
 	User getUserById(int id);

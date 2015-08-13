@@ -6,6 +6,8 @@ public interface AccountBo {
 	void save(Account account);
 
 	void update(Account account);
+	
+	void merge(Account account);
 
 	void delete(Account account);
 

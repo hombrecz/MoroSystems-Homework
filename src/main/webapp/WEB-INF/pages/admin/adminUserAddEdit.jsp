@@ -76,7 +76,7 @@
 			</tr>
 			<tr>
 				<td>Role:</td>
-				<td><form:select multiple="true" path="role">
+				<td><form:select multiple="true" path="roles">
 						<form:option value="ROLE_USER">user</form:option>
 						<form:option value="ROLE_ADMIN">admin</form:option>
 					</form:select>

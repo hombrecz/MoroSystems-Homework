@@ -31,9 +31,9 @@ public class User {
     private boolean enabled;
     private List<Book> books;
     private List<Account> accounts;
-    private List<Role> role;
-    private Integer favorite_book_id;
-    private Integer favorite_account_id;
+    private List<Role> roles;
+    private Integer favoriteBookId;
+    private Integer favoriteAccountId;
     private String birthdate;
     private String mailFrequency;
 
@@ -51,7 +51,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.role = role;
+        this.roles = role;
     }
 
     public User(Integer userid, String username, String password, boolean enabled, List<Role> role, String birthdate) {
@@ -59,7 +59,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.role = role;
+        this.roles = role;
         this.birthdate = birthdate;
     }
 
@@ -109,9 +109,7 @@ public class User {
         this.enabled = enabled;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @Cascade({ CascadeType.REMOVE })
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval=true)
     public List<Book> getBooks() {
         return books;
     }
@@ -120,9 +118,7 @@ public class User {
         this.books = books;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @Cascade({ CascadeType.REMOVE })
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval=true)
     public List<Account> getAccounts() {
         return accounts;
     }
@@ -134,30 +130,30 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @Cascade({ CascadeType.REMOVE })
     @OnDelete(action = OnDeleteAction.CASCADE)
-    public List<Role> getRole() {
-        return this.role;
+    public List<Role> getRoles() {
+        return this.roles;
     }
 
-    public void setRole(List<Role> role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Column(name = "favorite_book_id")
-    public Integer getFavorite_book_id() {
-        return favorite_book_id;
+    public Integer getFavoriteBookId() {
+        return favoriteBookId;
     }
 
-    public void setFavorite_book_id(Integer favorite_book_id) {
-        this.favorite_book_id = favorite_book_id;
+    public void setFavoriteBookId(Integer favorite_book_id) {
+        this.favoriteBookId = favorite_book_id;
     }
 
     @Column(name = "favorite_account_id")
-    public Integer getFavorite_account_id() {
-        return favorite_account_id;
+    public Integer getFavoriteAccountId() {
+        return favoriteAccountId;
     }
 
-    public void setFavorite_account_id(Integer favorite_account_id) {
-        this.favorite_account_id = favorite_account_id;
+    public void setFavoriteAccountId(Integer favorite_account_id) {
+        this.favoriteAccountId = favorite_account_id;
     }
 
     @Column(name = "birthdate")

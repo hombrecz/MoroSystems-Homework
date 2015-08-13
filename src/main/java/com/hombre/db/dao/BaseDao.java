@@ -11,7 +11,7 @@ public interface BaseDao<T, ID extends Serializable> {
     void refresh(T entity);
     T merge(T entity);
 
-    List<T> getAll();
+    List<T> getAllUsersWithAccounts();
 
     T getByID(Integer id);
 

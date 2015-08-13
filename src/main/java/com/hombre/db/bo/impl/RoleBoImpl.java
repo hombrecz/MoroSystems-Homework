@@ -11,30 +11,36 @@ import com.hombre.db.model.Role;
 @Service
 public class RoleBoImpl implements RoleBo {
 
-	@Autowired
-	private RoleDao roleDao;
+    @Autowired
+    private RoleDao roleDao;
 
-	@Transactional
-	public void setUserDao(RoleDao roleDao) {
-		this.roleDao = roleDao;
-	}
-
-	@Override
     @Transactional
-	public void save(Role role) {
-		roleDao.save(role);
-	}
+    public void setUserDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void update(Role role) {
-		roleDao.update(role);
-	}
+    public void save(Role role) {
+        roleDao.save(role);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void delete(Role role) {
-		roleDao.remove(role);
-	}
+    public void update(Role role) {
+        roleDao.update(role);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Role role) {
+        roleDao.remove(role);
+    }
+
+    @Override
+    @Transactional
+    public void merge(Role role) {
+        roleDao.merge(role);
+    }
 
 }

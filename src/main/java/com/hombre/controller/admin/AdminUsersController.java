@@ -80,17 +80,18 @@ public class AdminUsersController {
             if (user.getUserid() == -1) {
                 user.setPassword(hashCode.getHashPassword(user.getPassword()));
                 userBo.save(user);
-                for(Role role:user.getRole()) {
+                for(Role role:user.getRoles()) {
                     roleBo.save(new Role(user, role.getRole()));
                 }
             } else {
                 user.setPassword(hashCode.getHashPassword(user.getPassword()));
-                userBo.update(user);
-                for(Role role:userBo.getUserById(user.getUserid()).getRole()) {
+                userBo.merge(user);
+                
+                for(Role role:userBo.getUserById(user.getUserid()).getRoles()) {
                     roleBo.delete(role);
                 }
                 
-                for(Role role:user.getRole()) {
+                for(Role role:user.getRoles()) {
                     roleBo.save(new Role(user, role.getRole()));
                 }
             }

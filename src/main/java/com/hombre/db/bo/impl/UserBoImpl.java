@@ -13,49 +13,54 @@ import com.hombre.db.model.User;
 @Service
 public class UserBoImpl implements UserBo {
 
-	@Autowired
-	private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
-	@Transactional
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
-	@Override
     @Transactional
-	public void save(User user) {
-		userDao.save(user);
-	}
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void update(User user) {
-		userDao.update(user);
-	}
+    public void save(User user) {
+        userDao.save(user);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public void delete(User user) {
-		userDao.remove(user);
-	}
+    public void update(User user) {
+        userDao.update(user);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public User getUserById(int id) {
-		return userDao.getByID(id);
-	}
-	
-	@Override
-	@Transactional
-	public List<User> getUserByMailFreq(String freq) {
-	    return userDao.getByMailFreq(freq);
-	}
+    public void delete(User user) {
+        userDao.remove(user);
+    }
 
-	@Override
+    @Override
     @Transactional
-	public List<User> listUser() {
+    public User getUserById(int id) {
+        return userDao.getByID(id);
+    }
 
-		return userDao.getAll();
-	}
+    @Override
+    @Transactional
+    public List<User> getUserByMailFreq(String freq) {
+        return userDao.getByMailFreq(freq);
+    }
 
+    @Override
+    @Transactional
+    public List<User> listUser() {
+
+        return userDao.getAllUsersWithAccounts();
+    }
+
+    @Override
+    @Transactional
+    public void merge(User user) {
+        userDao.merge(user);
+    }
 }

@@ -11,7 +11,7 @@ import com.hombre.db.model.Account;
 public class AccountDaoImpl extends BaseDaoImpl<Account, Long> implements AccountDao {
     @SuppressWarnings("unchecked")
     @Override
-    public List<Account> getAll() {
+    public List<Account> getAllUsersWithAccounts() {
         return sessionFactory.getCurrentSession().createQuery("from accounts").list();
     }
 

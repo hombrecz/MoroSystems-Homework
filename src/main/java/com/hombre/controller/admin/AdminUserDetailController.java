@@ -91,7 +91,7 @@ public class AdminUserDetailController {
     public String onSubmit(@ModelAttribute("book") Book book, @ModelAttribute("user") User user, BindingResult result, SessionStatus status) {
         // Set<ConstraintViolation<Book>> constraintViolations =
         // validator.validate(book);
-        bookBo.update(book);
+        bookBo.merge(book);
         return "redirect:/admin/adminUserDetail?userid=" + book.getUser().getUserid() + "&username=" + book.getUser().getUsername()
                 + "&enabled=" + book.getUser().getEnabled();
     }
@@ -106,7 +106,7 @@ public class AdminUserDetailController {
     public String onSubmit(@ModelAttribute("account") Account account, BindingResult result, SessionStatus status) {
         // Set<ConstraintViolation<Account>> constraintViolations =
         // validator.validate(account);
-        accountBo.update(account);
+        accountBo.merge(account);
 
         return "redirect:/admin/adminUserDetail?userid=" + account.getUser().getUserid() + "&username=" + account.getUser().getUsername()
                 + "&enabled=" + account.getUser().getEnabled();
@@ -115,8 +115,8 @@ public class AdminUserDetailController {
     @RequestMapping(value = "admin/adminUserFavoriteBook", method = RequestMethod.POST)
     public String favoriteBook(@ModelAttribute("user") User user) {
         User updated_user = userBo.getUserById(user.getUserid());
-        updated_user.setFavorite_book_id(user.getFavorite_book_id());
-        userBo.update(updated_user);
+        updated_user.setFavoriteBookId(user.getFavoriteBookId());
+        userBo.merge(updated_user);
         return "redirect:/admin/adminUserDetail?userid=" + updated_user.getUserid() + "&username=" + updated_user.getUsername()
                 + "&enabled=" + updated_user.getEnabled();
     }
@@ -124,8 +124,8 @@ public class AdminUserDetailController {
     @RequestMapping(value = "admin/adminUserFavoriteAccount", method = RequestMethod.POST)
     public String favoriteAccount(@ModelAttribute("user") User user) {
         User updated_user = userBo.getUserById(user.getUserid());
-        updated_user.setFavorite_account_id(user.getFavorite_account_id());
-        userBo.update(updated_user);
+        updated_user.setFavoriteAccountId(user.getFavoriteAccountId());
+        userBo.merge(updated_user);
         return "redirect:/admin/adminUserDetail?userid=" + updated_user.getUserid() + "&username=" + updated_user.getUsername()
                 + "&enabled=" + updated_user.getEnabled();
     }

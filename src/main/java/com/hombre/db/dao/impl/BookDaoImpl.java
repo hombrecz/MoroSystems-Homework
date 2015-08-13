@@ -12,7 +12,7 @@ public class BookDaoImpl extends BaseDaoImpl<Book, Long> implements BookDao{
     
     @SuppressWarnings("unchecked")
     @Override
-    public List<Book> getAll() {
+    public List<Book> getAllUsersWithAccounts() {
         return sessionFactory.getCurrentSession().createQuery("from books").list();
     }
 

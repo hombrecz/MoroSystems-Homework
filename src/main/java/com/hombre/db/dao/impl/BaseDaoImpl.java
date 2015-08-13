@@ -44,7 +44,7 @@ public class BaseDaoImpl<T, ID extends Serializable> extends CustomHibernateDaoS
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<T> getAll() {
+    public List<T> getAllUsersWithAccounts() {
         return sessionFactory.getCurrentSession().createQuery("from "+persistentClass.getName()).list();
     }
 

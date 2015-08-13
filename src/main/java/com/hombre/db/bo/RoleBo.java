@@ -7,5 +7,7 @@ public interface RoleBo {
 
 	void update(Role role);
 
+	void merge(Role role);
+
 	void delete(Role role);
 }

@@ -21,6 +21,13 @@ public class ApplicationMailer {
 
     public static void sendMail(User user, ServletContext servletContext) throws TemplateException, IOException {
         Configuration configurer = new Configuration();
+        
+        //Nastavení UTF-8 kódování pro použití na různých platformách
+        System.setProperty("file.encoding", "utf-8");
+        System.setProperty("mail.mime.charset", "utf-8");
+        System.setProperty("client.encoding", "utf-8");
+        configurer.setDefaultEncoding("utf-8");
+        
         configurer.setServletContextForTemplateLoading(servletContext, "WEB-INF/templates"); 
         
         Template template = configurer.getTemplate("mail.ftl");

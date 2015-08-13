@@ -7,6 +7,8 @@ public interface BookBo {
 
 	void update(Book book);
 
+	void merge(Book book);
+
 	void delete(Book book);
 
 	Book getBookById(int id);
