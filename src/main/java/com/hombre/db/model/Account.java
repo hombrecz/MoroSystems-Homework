@@ -1,7 +1,7 @@
 package com.hombre.db.model;
 
-import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,8 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "accounts")
@@ -57,7 +58,8 @@ public class Account {
 	}
 
 	@NotNull
-	@Size(min = 1, max = 999999)
+	@Min(value = 1)
+	@Max(value = 999999)
 	@Column(name = "accountprefix")
 	public int getAccountPrefix() {
 		return accountPrefix;
@@ -78,7 +80,8 @@ public class Account {
 	}
 
 	@NotNull
-	@Size(min = 1, max = 9999)
+	@Min(value = 1)
+        @Max(value = 9999)
 	@Column(name = "bankcode")
 	public int getBankCode() {
 		return bankCode;

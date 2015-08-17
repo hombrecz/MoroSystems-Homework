@@ -95,6 +95,13 @@
 				<td>Spring security - database</td>
 				<td>done</td>
 			</tr>
+			<tr>
+				<td>9</td>
+				<td>REST Api - sms sending</td>
+				<td><form method="get" action="smsService">
+						<input type="submit" value="SMS sending interface">
+					</form></td>
+			</tr>
 		</sec:authorize>
 	</table>
 </body>

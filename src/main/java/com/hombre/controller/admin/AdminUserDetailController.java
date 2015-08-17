@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +89,7 @@ public class AdminUserDetailController {
 
     @Test
     @RequestMapping(value = "admin/adminUserDetailAddEditBook", method = RequestMethod.POST)
-    public String onSubmit(@ModelAttribute("book") Book book, @ModelAttribute("user") User user, BindingResult result, SessionStatus status) {
-        // Set<ConstraintViolation<Book>> constraintViolations =
-        // validator.validate(book);
+    public String onSubmit(@ModelAttribute("book") @Valid Book book, @ModelAttribute("user") User user, BindingResult result, SessionStatus status) {
         bookBo.merge(book);
         return "redirect:/admin/adminUserDetail?userid=" + book.getUser().getUserid() + "&username=" + book.getUser().getUsername()
                 + "&enabled=" + book.getUser().getEnabled();
@@ -103,9 +102,7 @@ public class AdminUserDetailController {
 
     @Test
     @RequestMapping(value = "admin/adminUserDetailAddEditAccount", method = RequestMethod.POST)
-    public String onSubmit(@ModelAttribute("account") Account account, BindingResult result, SessionStatus status) {
-        // Set<ConstraintViolation<Account>> constraintViolations =
-        // validator.validate(account);
+    public String onSubmit(@ModelAttribute("account") @Valid Account account, BindingResult result, SessionStatus status) {
         accountBo.merge(account);
 
         return "redirect:/admin/adminUserDetail?userid=" + account.getUser().getUserid() + "&username=" + account.getUser().getUsername()

@@ -27,6 +27,7 @@
 		com.hombre.propertyeditor,
 		com.hombre.security,
         com.hombre.scheduler,
+        com.hombre.smsservice,
 		com.hombre.startup,
 		com.hombre.validator        
 		" />
